@@ -13,15 +13,50 @@
   <script src="js/jscolor.min.js" type="text/javascript"></script>
   <style>
    
+   #main_container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
 
+@media (max-width: 768px) {
     #main_container {
-      display: flex;
-      justify-content: space-between;
-      gap: 20px;
+        flex-direction: column; /* Change to column layout for smaller screens */
+        gap: 10px; /* Adjust gap if necessary */
     }
+}
+
+#create, #preview_container {
+    width: 48%;
+}
+
+/* Adjust width for mobile */
+@media (max-width: 768px) {
     #create, #preview_container {
-      width: 48%;
+        width: 100%; /* Full width on smaller screens */
     }
+
+    #nexliness{
+          height: 0px;
+          width: 0px;
+          font-size: 0px;
+          span{
+            font-size: 1px;
+          }
+        }
+}
+
+.desktop-only {
+    display: inline; /* Show by default */
+}
+
+@media (max-width: 768px) {
+    .desktop-only {
+        display: none; /* Hide on screens smaller than 768px */
+    }
+}
+
+
     #watermark {
             position: absolute; /* Position it absolutely within the card container */
             top: 0; /* Align to the top */
@@ -31,6 +66,8 @@
           margin-right: 0px;
           
         }
+
+      
   </style>
 </head>
 
@@ -39,8 +76,10 @@
 
   <h1 style="margin-bottom: 30px; padding: 0%;">
     <img src="masaidiwali.gif" width="100" height="50px">
-    <span style="font-family:Georgia, 'Times New Roman', Times, serif; margin-left: 24%; font-size: 20px;">Tech Wali <span style="color: red;">Diwali</span></span>
-  </h1>
+    <span id="nexliness" class="desktop-only" style="font-family: Georgia, 'Times New Roman', Times, serif; margin-left: 24%; font-size: 20px;">
+      Tech Wali <span style="color: red;">Diwali</span>
+  </span>
+   </h1>
 
   <div id="main_container">
     <!-- Left Side: Controls -->
