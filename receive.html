@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Open Ecard Generator</title>
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://i.pinimg.com/736x/64/eb/b3/64ebb32f64efe2cace9588243000a26c.jpg">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://i.pinimg.com/736x/64/eb/b3/64ebb32f64efe2cace9588243000a26c.jpg">
     <link rel="manifest" href="site.webmanifest">
     <link rel="mask-icon" href="safari-pinned-tab.svg" color="#5bbad5">
     <meta name="msapplication-TileColor" content="#ffc40d">
@@ -14,19 +14,81 @@
     <link rel="stylesheet" type="text/css" href="css/card.css"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="js/receive.js" type="text/javascript"></script>
-  </head>
-  <body onload="quick_api()">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        #container {
+            display: flex;
+          
+            width: 100%;
+            max-width: 700px; /* Adjust max-width as needed */
+            justify-content: space-between; /* Space between card and URL section */
+            align-items: center; /* Center items vertically */
+        }
+        #card_container {
+          border-radius: 9px;
+            position: relative; /* Set to relative to position the watermark */
+            text-align: center;
+            flex: 1; /* Allow the card to take available space */
+            margin-right: 20px; /* Space between card and URL section */
+            margin-bottom: 10px;
+        }
+        #watermark {
+            position: absolute; /* Position it absolutely within the card container */
+            top: 0; /* Align to the top */
+            right : 0; /* Align to the left */
+            width: 66px; /* Set width */
+            height: 50px; /* Set height */
+          margin-right: 12px;
+        }
+        #url_section {
+            text-align: right; /* Align text to the right */
+            white-space: nowrap; /* Prevent line breaks */
+        }
+        #copy_button {
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body onload="quick_api()">
     <h1>Hi<span id="recipient">, </span><span id="sender">someone</span> sent you a card!</h1>
-    <div id="card_container">
-      <div id="view_card">
-        <center>
-          <img id="card_image"/><br>
-          <p id="message_preview">&nbsp;</p>
-        </center>
-      </div>
+    <div  id="container">
+        <div style="border-radius: 9px; box-shadow: 4px 5px 24px rgb(0, 0, 0); border: 1px; padding: 20px; text-align: center;" id="card_container">
+            <img id="watermark" src="https://www.giverefer.com/thumbnails/1680419202.png" alt="Watermark" />
+            <div id="view_card">
+                <img id="card_image" /><br>
+                <p id="message_preview">&nbsp;</p>
+            </div>
+        </div>
+
+        <div id="url_section">
+            <span id="url_text">Page URL: <span id="page_url">your_page_url_here</span></span>
+            <button id="copy_button" onclick="copyUrl()">Copy URL</button>
+        </div>
     </div>
-    <footer>
-      Designed with <a href="https://dohliam.github.io/ecards/">Open Ecard Generator</a>.
-    </footer>
-  </body>
+
+    <script>
+        // Get the full URL
+        const fullUrl = window.location.href; 
+        // Display the first 20 characters followed by '...' if URL is longer
+        const displayedUrl = fullUrl.length > 20 ? fullUrl.substring(0, 20) + '...' : fullUrl; 
+        document.getElementById("page_url").innerText = displayedUrl;
+
+        function copyUrl() {
+            const textArea = document.createElement("textarea");
+            textArea.value = fullUrl; // Use the full URL for copying
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand("copy");
+            document.body.removeChild(textArea);
+            alert("URL copied to clipboard: " + fullUrl); // Show full URL in alert
+        }
+    </script>
+</body>
 </html>
